@@ -23,11 +23,15 @@ Fisierul de intrare *bonus.in* contine pe prima linie numarul natural n (1 ≤ n
 Fisierul de iesire *bonus.out* va contine m linii, cate una pentru fiecare operatie din fisierul de intrare. Pe fiecare linie va fi scris rezultatul unei operatii, in ordinea in care operatiile apar in fisierul de intrare. Daca operatia este de tip 1, in fisierul de iesire va fi afisat numarul de ordine al submultimii specificate in operatie. Daca operatia este de tip 2, in fisierul de iesire vor fi afisate elementele submultimii cu numarul de ordine specificat, separate prin spatii, in ordine crescatoare.
 
 *Exemplu*
-| bonus.in                  | bonus.out |
-|---------------------------|-----------|
-| 3                         | 1 2 3     |
-| 3                         | 6         |
-| 2                         | 3         |
-| 3<br>1<br>2 2 3<br>2<br>7 |           |
+| bonus.in | bonus.out |
+|----------|-----------|
+| 3        | 1 2 3     |
+| 3        | 6         |
+| 2        | 3         |
+| 3        |           |
+| 1        |           |
+| 2 2 3    |           |
+| 2        |           |
+| 7        |           |
 
 OMI Iasi 2004
