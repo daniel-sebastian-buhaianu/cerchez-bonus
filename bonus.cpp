@@ -1,43 +1,102 @@
 #include <fstream>
 using namespace std;
+// fisiere citire/scriere
 ifstream fin("bonus.in");
 ofstream fout("bonus.out");
+// variabile globale
+int n;
+// functii ajutatoare
+void submultimeaUrmatoare(int &);
+void submultime(int);
+void afiseazaSubmultime(int);
 void afiseazaBiti(int, int);
-int pozitiaCeluiMaiSemnificativBit(int, int);
 void seteazaBit(int &, int, bool);
+int nrOrdine(int);
+int pozitiaCeluiMaiSemnificativBit(int, int);
 bool bit(int x, int k);
+// functia principala
 int main()
 {
-  // dat fiind un numar n, genereaza toate submultimile distincte nevide din multimea {1, 2, ..., n}
-	int n, x, k; 
-	fin >> n;
-	fin.close();
-	x = 1;
-	while (1)
+	int m, i, tip, lg, x, j, k;
+	fin >> n >> m;
+	for (i = 0; i < m; i++)
 	{
-		afiseazaBiti(x, n);
-		if (x == (1 << (n-1)))
- 		{
-			break;
+		fin >> tip;
+		if (tip == 1)
+		{
+			fin >> lg;
+			for (x = j = 0; j < lg; j++)
+			{
+				fin >> k;
+				seteazaBit(x, k-1, 1);
+			}
+			fout << nrOrdine(x) << '\n';
 		}
 		else
 		{
-			if (bit(x, n-1))
-			{
-				seteazaBit(x, n-1, 0);
-				k = pozitiaCeluiMaiSemnificativBit(x, n);
-				seteazaBit(x, k, 0);
-				seteazaBit(x, k+1, 1);
-			}
-			else
-			{
-				k = pozitiaCeluiMaiSemnificativBit(x, n);
-				seteazaBit(x, k+1, 1);
-			}
+			fin >> k;
+			submultime(k);
 		}
 	}
+	fin.close();
 	fout.close();
 	return 0;
+}
+int nrOrdine(int y)
+{
+	// data fiind o submultime reprezentata binar, sa se determine numarul ei de ordine
+	int nr, x, k;
+	nr = x = 1;
+	while (x != y)
+	{
+		submultimeaUrmatoare(x);
+		nr++;
+	}
+	return nr;
+}
+void submultime(int nro)
+{
+	// dat fiind un numar de ordine, sa se determine submultimea corespunzatoare
+	int nr, x, k;
+	nr = x = 1;
+	while (nr < nro)
+	{
+		submultimeaUrmatoare(x);
+		nr++;
+	}
+	afiseazaSubmultime(x);
+}
+void submultimeaUrmatoare(int & x)
+{
+	if (x != (1 << (n-1)))
+	{
+		int k;
+		if (bit(x, n-1))
+		{
+			seteazaBit(x, n-1, 0);
+			k = pozitiaCeluiMaiSemnificativBit(x, n);
+			seteazaBit(x, k, 0);
+			seteazaBit(x, k+1, 1);
+		}
+		else
+		{
+			k = pozitiaCeluiMaiSemnificativBit(x, n);
+			seteazaBit(x, k+1, 1);
+		}
+	}
+}
+void afiseazaSubmultime(int x)
+{
+	// descifreaza reprezentarea binara a lui x si afiseaza submultimea corespunzatoare
+	for (int i = 0; i < n; i++)
+	{
+		bool bit = x & (1 << i);
+		if (bit)
+		{
+			fout << i+1 << ' ';
+		}
+	}
+	fout << '\n';
 }
 void afiseazaBiti(int x, int nrb)
 {
