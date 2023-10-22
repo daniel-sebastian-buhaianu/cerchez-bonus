@@ -13,7 +13,7 @@ void afiseazaBiti(int, int);
 void seteazaBit(int &, int, bool);
 int nrOrdine(int);
 int pozitiaCeluiMaiSemnificativBit(int, int);
-bool bit(int x, int k);
+bool bit(int, int);
 // functia principala
 int main()
 {
